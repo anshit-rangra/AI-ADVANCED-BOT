@@ -1,9 +1,9 @@
 const cookieParser = require("cookie-parser");
-const express = require("express")
+const express = require("express");
 const authRouter = require("./routes/auth.routes");
 const authMiddleware = require("./middlewares/auth.middleware");
 const chatRoutes = require("./routes/chat.routes");
-const cors = require("cors")
+const cors = require("cors");
 const path = require("path");
 
 const app = express();
@@ -11,16 +11,20 @@ const app = express();
 app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
-}))
+}));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/api/auth', authRouter);
-app.use("/api/chats", authMiddleware, chatRoutes)
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("*name", (req, res) => {
+// API routes
+app.use("/api/auth", authRouter);
+app.use("/api/chats", authMiddleware, chatRoutes);
+
+// Fallback for React Router
+app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
