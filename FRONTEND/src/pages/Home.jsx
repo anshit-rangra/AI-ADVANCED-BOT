@@ -21,7 +21,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   useEffect(() => {
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io("https://ai-advanced-bot.onrender.com", {
       extraHeaders: {
         "token": `token=${token};`
       }
