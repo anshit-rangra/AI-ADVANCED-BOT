@@ -19,12 +19,13 @@ app.use(cookieParser());
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, "../public")));
 
+
 // API routes
 app.use("/api/auth", authRouter);
 app.use("/api/chats", authMiddleware, chatRoutes);
 
 // Fallback for React Router
-app.get("*", (req, res) => {
+app.get("*name", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 

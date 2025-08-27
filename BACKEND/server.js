@@ -1,4 +1,4 @@
-require("dotenv").config({ override: false });
+require("dotenv").config();
 const app = require("./src/app.js")
 const connectDb = require("./src/db/db.js");
 const http = require("http")
